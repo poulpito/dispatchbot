@@ -95,12 +95,12 @@ function initDispatch() {
   }
 }
 
-client.user.setPresence({
-    status: 'offline',
-});
-
 client.on('ready', async () => {
   console.log(`Logged in as ${client.user.tag}`);
+
+  client.user.setPresence({
+    status: 'offline',
+  });
   await initDispatch();
 
 });
