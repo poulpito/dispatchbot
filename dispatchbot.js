@@ -95,10 +95,13 @@ function initDispatch() {
   }
 }
 
+client.user.setPresence({
+    status: 'offline',
+});
+
 client.on('ready', async () => {
   console.log(`Logged in as ${client.user.tag}`);
   await initDispatch();
-
 });
 
 
@@ -113,7 +116,7 @@ client.on('ready', async () => {
     const AddMessageContent = `${interaction.message.content} \n🧑‍🚒 - ${username}`;
 
     const usertodelete = `\n🧑‍🚒 - ${username}`;
-    const RemoveMessageContent = interaction.message.content.replace(new RegExp(usertodelete, 'g'), "");
+    const RemoveMessageContent = interaction.message.content.replace(usertodelete, "");
 
     const EmptyContent = interaction.message.content.replace(new RegExp(`\n🧑‍🚒 - .*`, 'g'), "");
 
