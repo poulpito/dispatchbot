@@ -102,6 +102,7 @@ client.user.setPresence({
 client.on('ready', async () => {
   console.log(`Logged in as ${client.user.tag}`);
   await initDispatch();
+
 });
 
 
@@ -153,11 +154,15 @@ client.on('ready', async () => {
       components: [Actions],
     })
     .catch(console.error);
+
   }  else if (interaction.customId === 'Empty') {
     console.log("On vide TOUT / " + username);
-
     await initDispatch();
   }
+
+  const targetChannel = client.channels.cache.get(targetChannelID);
+  await targetChannel.messages.fetch();
+
 });
 
 
