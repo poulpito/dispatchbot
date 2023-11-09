@@ -76,14 +76,16 @@ function initDispatch() {
         const messageContent = "‎\n🚒  __**" + vehicule + "**__ \n\n";
         targetChannel.send({ content : messageContent, components: [Actions] })
         .then(sentMessage => {
-          console.log(`Message créé dans ${targetChannel.name}:\n${messageContent}`);
+          console.log(`Message créé dans ${targetChannel.name}:\n${messageContent}`);     
         })
+        .catch(console.error);
       }
 
       targetChannel.send({ content : '‎\n\n', components: [Cleanup] })
         .then(sentMessage => {
           console.log(`Bouton de nettoyge créé`);
         })
+        .catch(console.error);
 
     }, 2000);
 
@@ -99,7 +101,8 @@ client.on('ready', async () => {
 
 });
 
-client.on('interactionCreate', async (interaction) => {
+
+ client.on('interactionCreate', async (interaction) => {
   if (!interaction.isButton()) return;
 
     const guild = interaction.message.guild;
@@ -123,7 +126,8 @@ client.on('interactionCreate', async (interaction) => {
 
     await interaction.update({
       components: [Actions],
-    });
+    })
+    .catch(console.error);
     
   }  else if (interaction.customId === 'LeaveDuty') {
     console.log("Fin de service / " + username);
@@ -133,7 +137,8 @@ client.on('interactionCreate', async (interaction) => {
 
     await interaction.update({
       components: [Actions],
-    });
+    })
+    .catch(console.error);
 
   }  else if (interaction.customId === 'Clean') {
     console.log("On vide le véhicule / " + username);
@@ -143,7 +148,8 @@ client.on('interactionCreate', async (interaction) => {
 
     await interaction.update({
       components: [Actions],
-    });
+    })
+    .catch(console.error);
   }  else if (interaction.customId === 'Empty') {
     console.log("On vide TOUT / " + username);
 
